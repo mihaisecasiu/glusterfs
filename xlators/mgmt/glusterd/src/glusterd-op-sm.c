@@ -2859,7 +2859,7 @@ rb_spawn_dst_brick (glusterd_volinfo_t *volinfo,
 
         snprintf (cmd_str, 8192,
                   "%s/sbin/glusterfs -f %s/vols/%s/%s -p %s/vols/%s/%s "
-                  "--xlator-option src-server.listen-port=%d",
+                  "--xlator-option src-server.listen-port=%d --mac-compat=off",
                   GFS_PREFIX, priv->workdir, volinfo->volname,
                   RB_DSTBRICKVOL_FILENAME,
                   priv->workdir, volinfo->volname,
@@ -2895,7 +2895,7 @@ rb_spawn_glusterfs_client (glusterd_volinfo_t *volinfo,
         priv = THIS->private;
 
         snprintf (cmd_str, 4096,
-                  "%s/sbin/glusterfs -f %s/vols/%s/%s %s/vols/%s/%s",
+                  "%s/sbin/glusterfs -f %s/vols/%s/%s %s/vols/%s/%s --mac-compat=off",
                   GFS_PREFIX, priv->workdir, volinfo->volname,
                   RB_CLIENTVOL_FILENAME,
                   priv->workdir, volinfo->volname,
@@ -3236,7 +3236,7 @@ rb_get_xattr_command (glusterd_volinfo_t *volinfo,
                  goto out;
          }
 
-        ret = lgetxattr (mount_point_path, xattr_key,
+        ret = sys_lgetxattr (mount_point_path, xattr_key,
                          value,
                          8192);
 
@@ -5066,7 +5066,7 @@ glusterd_quota_initiate_fs_crawl (glusterd_conf_t *priv, char *volname)
         }
 err:
         if (ret < 0) {
-                umount (mountdir);
+                sys_umount (mountdir);
                 if (child_info)
                         GF_FREE (child_info);
         }

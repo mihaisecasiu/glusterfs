@@ -21,6 +21,9 @@
 #define __SYSCALL_H__
 
 int
+sys_umount (const char *target);
+
+int
 sys_lstat (const char *path, struct stat *buf);
 
 int

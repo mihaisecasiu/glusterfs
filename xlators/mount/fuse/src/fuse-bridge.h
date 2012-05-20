@@ -44,7 +44,8 @@
 #ifdef GF_DARWIN_HOST_OS
 /* This is MacFUSE's marker for MacFUSE-specific code */
 #define __FreeBSD__ 10
-#include "fuse_kernel_macfuse.h"
+#define FUSE_USE_VERSION 25
+#include "fuse.h"
 #else
 #include "fuse_kernel.h"
 #endif

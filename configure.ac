@@ -306,6 +306,9 @@ case $host_os in
      linux*)
 #do nothing
        ;;
+     darwin*)
+#do nothing
+       ;;
      *)
 #disabling geo replication for non-linux platforms
 	enable_georeplication=no

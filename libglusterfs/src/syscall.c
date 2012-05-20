@@ -29,6 +29,22 @@
 #include <utime.h>
 #include <sys/time.h>
 
+#include <sys/param.h>
+#include <sys/mount.h>
+
+int
+sys_umount (const char *target)
+{
+
+#ifdef GF_LINUX_HOST_OS
+        return umount (target);
+#endif
+
+#ifdef GF_DARWIN_HOST_OS
+        return unmount(target,0);
+#endif
+}
+
 int
 sys_lstat (const char *path, struct stat *buf)
 {

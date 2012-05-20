@@ -2076,8 +2076,8 @@ socket_connect (rpc_transport_t *this, int port)
 
                 if (ret == -1 && errno != EINPROGRESS) {
                         gf_log (this->name, GF_LOG_ERROR,
-                                "connection attempt failed (%s)",
-                                strerror (errno));
+                                "connection attempt to: %s failed (%s) port:%d",
+                                strerror (errno),port);
                         close (priv->sock);
                         priv->sock = -1;
                         goto unlock;

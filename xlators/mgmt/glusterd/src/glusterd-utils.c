@@ -1117,7 +1117,7 @@ glusterd_volume_start_glusterfs (glusterd_volinfo_t  *volinfo,
                 snprintf (cmd_str, 8192,
                           "%s/sbin/glusterfsd --xlator-option %s-server.listen-port=%d "
                           "-s localhost --volfile-id %s -p %s -S %s --brick-name %s "
-                          "--brick-port %d -l %s", GFS_PREFIX, volinfo->volname,
+                          "--brick-port %d -l %s --mac-compat=off", GFS_PREFIX, volinfo->volname,
                           port, volfile, pidfile, socketpath, brickinfo->path, port,
                           brickinfo->logfile);
         } else {
@@ -1129,7 +1129,7 @@ glusterd_volume_start_glusterfs (glusterd_volinfo_t  *volinfo,
                           "%s/sbin/glusterfsd --xlator-option %s-server.listen-port=%d "
                           "--xlator-option %s-server.transport.rdma.listen-port=%d -s localhost "
                           "--volfile-id %s -p %s -S %s --brick-name %s "
-                          "--brick-port %d,%d -l %s", GFS_PREFIX, volinfo->volname,
+                          "--brick-port %d,%d -l %s --mac-compat=off", GFS_PREFIX, volinfo->volname,
                           port, volinfo->volname, rdma_port, volfile, pidfile,
                           socketpath, brickinfo->path, port, rdma_port,
                           brickinfo->logfile);
@@ -2282,7 +2282,7 @@ glusterd_nfs_server_start ()
         snprintf (logfile, PATH_MAX, "%s/nfs.log", DEFAULT_LOG_FILE_DIRECTORY);
 
         snprintf (cmd_str, 8192,
-                  "%s/sbin/glusterfs -f %s -p %s -l %s",
+                  "%s/sbin/glusterfs -f %s -p %s -l %s --mac-compat=off",
                   GFS_PREFIX, volfile, pidfile, logfile);
         ret = gf_system (cmd_str);
 
